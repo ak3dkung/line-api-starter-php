@@ -11,7 +11,7 @@
 
 Function ที่ใช้ในการส่งข้อความมีดังนี้ครับ
 1. ส่งข้อความหา User -> PushMessages(ชื่อ UserId,ข้อความที่ต้องากรส่ง); example : PushMessages($userId,"สวัสดีเหมียว");
-2. ส่งปุ่มแบบ Template -> PushTemplateButton($userId,$text,$tn,$title,$button)
+2. ส่งปุ่มแบบ Template -> PushTemplateButton($userId,$text,$tn,$title,$button) => $tn คือ ภาพ Thumbnail นะครับ เผื่อใครงง
    2.1 วิธีการสร้างตัวแปร $button ใช้ Code ตามนี้ :
     $uri="ชื่อ Url ที่ กดปุ่มแล้วจะวิ่งไป";
     $arrayBtn=array('type'=>'uri','label'=>'Label จะให้ปุ่มโชว์ว่าอะไร','uri'=>$uri);
