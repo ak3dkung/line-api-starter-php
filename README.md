@@ -3,6 +3,8 @@
 โครงสร้างระบบที่ผมใช้คือ Deploy บน Heroku ครับ
 แล้วใช้ MySQL ของ MariaDB บน Heroku + ใช้ Cloudinary ในการเก็บภาพที่ User ส่งมา
 
+เริ่มต้น Config ด้วยการตั้ง Webhook ของ LINE มาที่ https://(your_hosting)/api/line_callback.php
+
 วิธีการใช้งาน แบบง่ายๆ
 1. แก้ไขข้อมูลใน config.php - Access Token, MySQL และ Cloudinary API
 2. เมื่อ Config เรียบร้อย ให้เข้าไปดูใน Folder Event จะมี Event รูปแบบต่างๆ ที่เขียนรับค่าตัวแปรมาไว้แล้ว ไม่ว่าจะเป็น Follow , Message , Postback
