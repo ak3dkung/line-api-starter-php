@@ -5,6 +5,8 @@
 //พอมีคนส่งข้อความมา อยากให้ทำอะไรก็พิมพ์ต่อจากนี้ได้เลย
 
 
+pushLoadingAnimation($userId);
+replyMessages($replyToken,["Hello World"]);
 
 
 ?>

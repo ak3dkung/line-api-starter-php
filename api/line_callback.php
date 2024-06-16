@@ -1,9 +1,5 @@
 <?php
 
-require 'src/Cloudinary.php';
-require 'src/Uploader.php';
-require 'src/Api.php';
-
 include "config.php";
 include "sql_db.php";
 include "line_function.php";
@@ -24,18 +20,20 @@ function followEvent(){
     $con=$GLOBALS['con'];
     $data=$GLOBALS['webhook'];
     $userId=$data['events'][0]['source']['userId'];
+    $replyToken = $data['events'][0]['replyToken'];
     $user_information=GetProfile($userId);
     $user_information=json_decode($user_information,true);
     $profileimageURL=$user_information['pictureUrl'];
 	$displayName=$user_information['displayName']."-".time();
     
-	include "follow_event.php";
+	include "event/follow_event.php";
 }
 
 function postbackEvent(){
     $con=$GLOBALS['con'];
 	$data=$GLOBALS['webhook'];
 	$userId=$data['events'][0]['source']['userId'];
+    $replyToken = $data['events'][0]['replyToken'];
 	$jsonData=str_replace("\\","",$data['events'][0]['postback']['data']);
 	$arrayData=json_decode($jsonData,true);
 
@@ -46,23 +44,22 @@ function messageEvent(){
     $con=$GLOBALS['con'];
     $data=$GLOBALS['webhook'];
     $userId=$data['events'][0]['source']['userId'];
+    $replyToken = $data['events'][0]['replyToken'];
 	$messageType=$data['events'][0]['message']['type'];
     $messageId=$data['events'][0]['message']['id'];
     //--------------------------------------------------------//
     if($messageType=="text"){
         $receiveText=$messageType=$data['events'][0]['message']['text'];
-        include "message_text_event.php";
+        include "event/message_text_event.php";
     }
     //--------------------------------------------------------//
     if($messageType=="image"){
 		$imgData=data_uri(getImage($messageId),'image/png');
         $file=$userId."_".time();
         $filename=md5($userId."".time());
-        $default_upload_options = array("tags" => "receipt","public_id" => $filename,"folder"=>$folderName);
-        $uploadData = \Cloudinary\Uploader::upload($imgData,$default_upload_options);
-		$finalPath=$uploadData['secure_url'];
+        		
 		
-		include "message_image_event.php";
+		include "event/message_image_event.php";
     }
     //--------------------------------------------------------//
     if($messageType=="sticker"){
