@@ -1,0 +1,59 @@
+{
+    "size": {
+        "width": 2500,
+        "height": 1686
+    },
+    "selected": true,
+    "name": "Campaign1",
+    "chatBarText": "7-Eleven",
+    "areas": [
+        {
+            "bounds": {
+                "x": 0,
+                "y": 0,
+                "width": 2500,
+                "height": 843
+            },
+            "action": {
+                "type": "message",
+                "text": "อัปโหลดใบเสร็จ"
+            }
+        },
+        {
+            "bounds": {
+                "x": 0,
+                "y": 843,
+                "width": 834,
+                "height": 843
+            },
+            "action": {
+                "type": "message",
+                "text": "ตรวจสอบสิทธิ์"
+            }
+        },
+        {
+            "bounds": {
+                "x": 834,
+                "y": 843,
+                "width": 834,
+                "height": 843
+            },
+            "action": {
+                "type": "message",
+                "text": "ติดต่อสอบถาม"
+            }
+        },
+        {
+            "bounds": {
+                "x": 1667,
+                "y": 843,
+                "width": 834,
+                "height": 843
+            },
+            "action": {
+                "type": "message",
+                "text": "เลือกกิจกรรม"
+            }
+        }
+    ]
+}

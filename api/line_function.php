@@ -179,6 +179,73 @@ function replyFlex($replyToken, $flexArray, $title = "ส่ง Flex Messages", 
 	return $result;
 }
 
+function createDefaultRichMenu($templatePath = null){
+	if(strpos($templatePath,".json")!==false){
+		return "กรุณากำหนดไฟล์ JSON ของ Template RichMenu";
+	} else {
+		$access_token = $GLOBALS['access_token'];
+		$url = 'https://api.line.me/v2/bot/richmenu';        
+		$post = file_get_contents($templatePath);
+		$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+		$ch = curl_init($url);
+		curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+		curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+		curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+		curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+		$result = curl_exec($ch);
+		curl_close($ch);
+		return $result;
+	}
+	
+}
+function uploadImageToRichMenu($richMenuId,$imagePath){
+	$access_token = $GLOBALS['access_token'];   
+	$url = 'https://api-data.line.me/v2/bot/richmenu/'.$richMenuId.'/content';
+	$imagePath=file_get_contents($imagePath);
+	$post = array('file' => $imagePath,'type'=> 'image/jpeg');
+	$headers = array('Content-Type: image/jpeg', 'Authorization: Bearer ' . $access_token);
+	$ch = curl_init($url);
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $imagePath);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	return $result;
+}
+function pushRichMenuToUser($richMenuId,$userId){
+	$access_token = $GLOBALS['access_token'];
+	$url = 'https://api.line.me/v2/bot/user/'.$userId.'/richmenu/'.$richMenuId;        
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+	$ch = curl_init($url);
+	$post="";
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "POST");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	return $result;
+}
+function deleteRichMenuFromUser($userId){
+	$access_token = $GLOBALS['access_token'];
+	$url = 'https://api.line.me/v2/bot/user/'.$userId.'/richmenu';        
+	$headers = array('Content-Type: application/json', 'Authorization: Bearer ' . $access_token);
+	$ch = curl_init($url);
+	$post="";
+	curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "DELETE");
+	curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+	curl_setopt($ch, CURLOPT_POSTFIELDS, $post);
+	curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+	curl_setopt($ch, CURLOPT_FOLLOWLOCATION, 1);
+	$result = curl_exec($ch);
+	curl_close($ch);
+	return $result;
+}
+
 function pushLoadingAnimation($userId)
 {
 	$access_token = $GLOBALS['access_token'];
